@@ -75,10 +75,10 @@ async function fetchData(url) {
 
     displayQuestion(currentQuestionIndex);
   } catch (error) {
-    const req = document.createElement("h3");
-    req.innerHTML = `True/False is not available for ${
+    const req = document.createElement("h4");
+    req.innerHTML = `The ${
       category[category.value - 8].innerHTML
-    }... `;
+    } Category is currently not available, please try another...`;
     container.appendChild(req);
 
     console.error("There has been a problem with your fetch operation:", error);
