@@ -12,6 +12,7 @@ async function fetchData(url) {
     try {
         const response = await fetch(url); 
         if (!response.ok) {
+            
             throw new Error('Network response was not ok ' + response.statusText);
         }
         const data = await response.json();
@@ -29,7 +30,7 @@ async function fetchData(url) {
 
             if (index < totalQuestions) {
                 const question = document.createElement('p');
-                question.innerHTML = `${index+1} . `+ data.results[index].question;
+                question.innerHTML = `${index+1} . `+data.results[index].question;
                 container.appendChild(question);
 
                 let array = [];
@@ -78,7 +79,7 @@ async function fetchData(url) {
                 });
             } else {
                 const endMessage = document.createElement('p');
-                endMessage.innerText = `Quiz Completed! You have scored ${score} out of ${totalQuestions}`;
+                endMessage.innerHTML = `<h3>Quiz Completed! </h3>  <h5>You have scored ${score} out of ${totalQuestions}.</h5>`;
                 container.appendChild(endMessage);
                
 
@@ -90,9 +91,14 @@ async function fetchData(url) {
 
     
   } catch (error) {
+    const req = document.createElement('h3')
+            req.innerHTML = `True/False is not available for ${category[category.value - 8].innerHTML}... `;
+            container.appendChild(req);
+            
     console.error("There has been a problem with your fetch operation:", error);
   }
 }
+
 
 function resetAll() {
   btn.style.display = "none";
