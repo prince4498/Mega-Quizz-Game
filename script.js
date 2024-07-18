@@ -29,7 +29,7 @@ async function fetchData(url) {
 
             if (index < totalQuestions) {
                 const question = document.createElement('p');
-                question.innerHTML = data.results[index].question;
+                question.innerHTML = `${index+1} . `+ data.results[index].question;
                 container.appendChild(question);
 
                 let array = [];
