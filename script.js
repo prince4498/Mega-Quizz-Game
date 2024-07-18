@@ -9,110 +9,91 @@ const main_container = document.getElementById("main-comtainer");
 let src = "https://opentdb.com/api.php?";
 
 async function fetchData(url) {
-    try {
-        const response = await fetch(url); 
-        if (!response.ok) {
-            
-            throw new Error('Network response was not ok ' + response.statusText);
-        }
-        const data = await response.json();
-        console.log(data);
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error("Network response was not ok " + response.statusText);
+    }
+    const data = await response.json();
 
-        // document.querySelector('form').style.display='none';
+    let currentQuestionIndex = 0;
+    let score = 0;
+    const totalQuestions = amount.value;
+    const container = document.querySelector("#container");
 
-        let currentQuestionIndex = 0;
-        let score = 0;
-        const totalQuestions = amount.value;
-        const container = document.querySelector('#container');
+    function displayQuestion(index) {
+      container.innerHTML = "";
 
-        function displayQuestion(index) {
-            container.innerHTML = ''; // Clear previous question and options
+      if (index < totalQuestions) {
+        const question = document.createElement("p");
+        question.innerHTML = `${index + 1} . ` + data.results[index].question;
+        container.appendChild(question);
 
-            if (index < totalQuestions) {
-                const question = document.createElement('p');
-                question.innerHTML = `${index+1} . `+data.results[index].question;
-                container.appendChild(question);
+        let array = [];
+        let incorrect_arr = data.results[index].incorrect_answers;
+        let correct_arr = data.results[index].correct_answer;
 
-                let array = [];
-                let incorrect_arr = data.results[index].incorrect_answers;
-                let correct_arr = data.results[index].correct_answer;
+        array.push(...incorrect_arr, correct_arr);
+        let final_arr = shuffleArray(array);
 
-                array.push(...incorrect_arr, correct_arr);
-                let final_arr = shuffleArray(array);
+        final_arr.forEach((answer) => {
+          const option = document.createElement("button");
+          container.appendChild(option);
+          option.classList.add("option_button");
+          option.innerText = answer;
 
-                final_arr.forEach((answer) => {
-                    const option = document.createElement('button');
-                    container.appendChild(option);
-                    option.classList.add('option_button');
-                    option.innerText = answer;
-
-                    option.addEventListener('click', (e) => {
-                        if (e.target.innerHTML === correct_arr) {
-                        
-                           e.target.classList.add('correct');
-                            score++;
-                        
-                            
-                            console.log("Correct");
-                        } else {
-                            e.target.classList.add('incorrect');
-                            console.log("Incorrect");
-                        }
-                        Array.from(container.children).forEach((button)=>{
-                            if(button.innerHTML===correct_arr){
-                                button.classList.add('correct');
-                            }
-                            button.disabled = true;
-                        })
-
-                        const next = document.createElement('button')
-                        next.innerHTML = 'Next';
-                        next.id = 'next';
-                        container.appendChild(next);
-                        // btn.style.display = 'block';
-                        next.addEventListener('click',()=>{
-                           currentQuestionIndex++;
-                           displayQuestion(currentQuestionIndex)
-                        })
-                       
-                    });
-                });
+          option.addEventListener("click", (e) => {
+            if (e.target.innerHTML === correct_arr) {
+              e.target.classList.add("correct");
+              score++;
             } else {
-                const endMessage = document.createElement('p');
-                endMessage.innerHTML = `<h3>Quiz Completed! </h3>  <h5>You have scored ${score} out of ${totalQuestions}.</h5>`;
-                container.appendChild(endMessage);
-               
-
+              e.target.classList.add("incorrect");
             }
-        }
+            Array.from(container.children).forEach((button) => {
+              if (button.innerHTML === correct_arr) {
+                button.classList.add("correct");
+              }
+              button.disabled = true;
+            });
 
-        displayQuestion(currentQuestionIndex);
-    
+            const next = document.createElement("button");
+            next.innerHTML = "Next";
+            next.id = "next";
+            container.appendChild(next);
+            next.addEventListener("click", () => {
+              currentQuestionIndex++;
+              displayQuestion(currentQuestionIndex);
+            });
+          });
+        });
+      } else {
+        const endMessage = document.createElement("p");
+        endMessage.innerHTML = `<h3>Quiz Completed! </h3>  <h5>You have scored ${score} out of ${totalQuestions}.</h5>`;
+        container.appendChild(endMessage);
+      }
+    }
 
-    
+    displayQuestion(currentQuestionIndex);
   } catch (error) {
-    const req = document.createElement('h3')
-            req.innerHTML = `True/False is not available for ${category[category.value - 8].innerHTML}... `;
-            container.appendChild(req);
-            
+    const req = document.createElement("h3");
+    req.innerHTML = `True/False is not available for ${
+      category[category.value - 8].innerHTML
+    }... `;
+    container.appendChild(req);
+
     console.error("There has been a problem with your fetch operation:", error);
   }
 }
-
 
 function resetAll() {
   btn.style.display = "none";
   while (container.firstChild) {
     container.removeChild(container.firstChild);
-   
   }
 }
 
 btn.addEventListener("click", (e) => {
-  
- 
-    resetAll();
-  submit();
+  resetAll();
   fetchData(
     src +
       `amount=${amount.value}` +
@@ -120,12 +101,7 @@ btn.addEventListener("click", (e) => {
       `&difficulty=${difficulty.value}` +
       `&type=${type.value}`
   );
-
 });
-
-function submit() {
-  console.log("Submitted");
-}
 
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -134,4 +110,3 @@ function shuffleArray(array) {
   }
   return array;
 }
-
