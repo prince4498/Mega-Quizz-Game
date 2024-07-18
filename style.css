@@ -1,0 +1,156 @@
+/* Reset some default styles */
+body {
+    display: flex;
+    flex-direction: column;
+    margin: 0;
+    padding: 0;
+    font-family: 'Arial', sans-serif;
+    background-color: #1a1a2e;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h2.heading {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #e94560;
+    animation: fadeIn 1s;
+}
+
+/* .form-api {
+    background: linear-gradient(135deg, #16222a, #3a6073);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 400px;
+    animation: scaleUp 0.5s ease;
+} */
+
+label {
+    margin: 10px 0;
+    display: block;
+    font-size: 16px;
+}
+
+input[type="number"],
+select {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background: #4b4b4b;
+    color: #fff;
+    transition: background 0.3s;
+    box-sizing: border-box;
+}
+
+input[type="number"]:focus,
+select:focus {
+    background: #e94560;
+    outline: none;
+}
+
+button.btn {
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: #e94560;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.option_button{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 10px 0;
+    height: 40px;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: #13121267;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+.option_button:hover:not(:disabled){
+    background: #4b4b4b;
+    transform: scale(1.015);
+}
+.option_button:hover:disabled{
+    cursor: not-allowed;
+}
+
+button.btn:hover {
+    background: #ff6b81;
+    transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes scaleUp {
+    from {
+        transform: scale(0.8);
+    }
+    to {
+        transform: scale(1);
+    }
+}
+
+#main-container{
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(135deg, #16222a, #3a6073);
+    border-radius: 15px;
+    padding: 30px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
+    width: 100%;
+    max-width: 400px;
+    animation: scaleUp 1s ease;
+}
+
+.correct{
+    background-color: green;
+}
+
+.incorrect{
+    background-color: red;
+}
+
+#next{
+    width: 100%;
+    padding: 12px;
+    margin-top: 20px;
+    border: none;
+    border-radius: 5px;
+    background: #3f63ff;
+    color: #fff;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+#next:hover{
+    background-color: #263fae;
+   transform: scale(1.03);
+}
