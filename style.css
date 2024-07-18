@@ -1,4 +1,5 @@
 /* Reset some default styles */
+
 body {
     display: flex;
     flex-direction: column;
@@ -14,21 +15,13 @@ body {
 }
 
 h2.heading {
+    font-size: 36px;
     text-align: center;
     margin-bottom: 20px;
     color: #e94560;
     animation: fadeIn 1s;
 }
 
-/* .form-api {
-    background: linear-gradient(135deg, #16222a, #3a6073);
-    border-radius: 15px;
-    padding: 30px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.6);
-    width: 100%;
-    max-width: 400px;
-    animation: scaleUp 0.5s ease;
-} */
 
 label {
     margin: 10px 0;
@@ -153,4 +146,14 @@ button.btn:hover {
 #next:hover{
     background-color: #263fae;
    transform: scale(1.03);
+}
+
+h3{
+    font-size: 22px;
+    text-align: center;
+}
+
+h5{
+    font-size: 16px;
+    text-align: center;
 }
