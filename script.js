@@ -4,12 +4,21 @@ const difficulty = document.getElementById("difficulty");
 const type = document.getElementById("type");
 const btn = document.getElementById("btn");
 const container = document.getElementById("container");
-const main_container = document.getElementById("main-comtainer");
+const main_container = document.getElementById("main-container");
+const loading = document.getElementById("loading"); 
+const form = document.querySelector(".form-api")
 
 let src = "https://opentdb.com/api.php?";
 
 async function fetchData(url) {
+  if (!loading) {
+    console.error("Loading spinner element not found");
+    return;
+  }
+
   try {
+    loading.style.display = "block";
+
     const response = await fetch(url);
     if (!response.ok) {
       throw new Error("Network response was not ok " + response.statusText);
@@ -75,32 +84,51 @@ async function fetchData(url) {
 
     displayQuestion(currentQuestionIndex);
   } catch (error) {
-    const req = document.createElement("h4");
-    req.innerHTML = `The ${
+    const req = document.createElement("h3");
+    req.innerHTML = `True/False is not available for ${
       category[category.value - 8].innerHTML
-    } Category is currently not available, please try another...`;
+    }... `;
     container.appendChild(req);
 
     console.error("There has been a problem with your fetch operation:", error);
+  } finally {
+    loading.style.display = "none";
   }
 }
 
 function resetAll() {
+  loading.style.display = "block";
+  
+  const elementsToRemove = Array.from(container.children).filter(
+    child => child !== loading
+  );
+  
+  elementsToRemove.forEach(child => container.removeChild(child));
+  
   btn.style.display = "none";
-  while (container.firstChild) {
-    container.removeChild(container.firstChild);
-  }
 }
 
+
 btn.addEventListener("click", (e) => {
-  resetAll();
-  fetchData(
-    src +
-      `amount=${amount.value}` +
-      `&category=${category.value}` +
-      `&difficulty=${difficulty.value}` +
-      `&type=${type.value}`
-  );
+  if (document.getElementById("warn-message")) {
+    container.removeChild(document.getElementById("warn-message"));
+  }
+  if (amount.value > 0 && amount.value < 51) {
+    resetAll();
+    fetchData(
+      src +
+        `amount=${amount.value}` +
+        `&category=${category.value}` +
+        `&difficulty=${difficulty.value}` +
+        `&type=${type.value}`
+    );
+  } else {
+    const warn = document.createElement("p");
+    warn.id = "warn-message";
+    warn.innerHTML = "Enter the Number of Questions Between 1 to 50 ...";
+    warn.style.color = "red";
+    container.appendChild(warn);
+  }
 });
 
 function shuffleArray(array) {
