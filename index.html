@@ -1,21 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quizz</title>
-    <link rel="stylesheet" href="style.css" />
-  </head>
-  <body>
-    <div id="main-container">
-    <h2 class="heading">Quizz Game</h2>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quizz</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="main-container">
+    <h2 class="heading">Mega Quizz</h2>
     <div id="container">
-        
       <form method="get" class="form-api" >
-
         <label for="amount">Number of Questions:</label>
-        <input id="amount" type="number" min="1" max="50" value="10" />
-
+        <input id="amount" type="number" min="1" max="50" value="10">
         <label for="category">Select Category: </label>
         <select name="category" class="form-control" id="category">
           <option value="0">Any Category</option>
@@ -44,35 +41,25 @@
           <option value="31">Entertainment: Japanese Anime &amp; Manga</option>
           <option value="32">Entertainment: Cartoon &amp; Animations</option>
         </select>
-
         <label for="difficulty">Select Difficulty: </label>
         <select name="difficulty" class="form-control" id="difficulty">
           <option value="hard">Hard</option>
           <option value="easy">Easy</option>
           <option value="medium">Medium</option>
         </select>
-
         <label for="type">Select Type: </label>
         <select name="type" class="form-control" id="type">
           <option value="multiple">Multiple Choice</option>
           <option value="boolean">True / False</option>
         </select>
-
-        
       </form>
-    
+      <div id="loading" >
+        <div class="spinner"></div>
+      </div>
     </div>
-    <button
-    class="btn btn-block"
-    value="#"
-    type="submit"
-    id="btn"
-    onsubmit="()=>submit()"
-  >
-    Start Quizz
-  </button>
-</div>
-
-    <script src="script.js"></script>
-  </body>
+    
+    <button class="btn btn-block" value="#" type="submit" id="btn">Start Quizz</button>
+  </div>
+  <script src="script.js"></script>
+</body>
 </html>
